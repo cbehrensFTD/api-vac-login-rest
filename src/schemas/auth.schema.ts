@@ -62,5 +62,11 @@ export const vColaboradoresSchema = z.object({
   MAIL: z.string(),
 });
 
+export const getUserSchema = z.object({
+  body: z.object({
+    token: z.string().min(1, "Token is required"),
+  })
+})
+
 export type VColaboradoresType = z.infer<typeof vColaboradoresSchema>;
 export type UsersType = z.infer<typeof usersSchema>;

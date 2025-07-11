@@ -101,3 +101,42 @@ export const verifyOtp: Handler = async (req, res) => {
     });
   }
 };
+
+export const getUser: Handler = async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    const verifyTokenResult = await authService.verifyToken(token);
+
+    if (!verifyTokenResult.success) {
+      return res.status(401).json({
+        code: verifyTokenResult.code,
+        message: verifyTokenResult.message,
+      });
+    }
+
+    if (!verifyTokenResult.email) {
+      throw new Error("Email not found");
+    }
+
+    const validateEmailResult = await authService.validateEmail(
+      verifyTokenResult.email
+    );
+
+    if (!validateEmailResult.success) {
+      return res.status(401).json({
+        code: validateEmailResult.code,
+        message: validateEmailResult.message,
+      });
+    }
+
+    res.status(200).json({
+      message: "Verify otp successfully",
+      user: validateEmailResult.user,
+    });
+  } catch (error: any) {
+    return res.status(400).json({
+      message: error.message,
+    });
+  }
+};
