@@ -1,5 +1,5 @@
 {
-  "name": "ftd-portal-vacaciones-api",
+  "name": "api-vac-login-rest",
   "version": "1.0.0",
   "description": "API para el portal de vacaciones",
   "main": "dist/index.js",
