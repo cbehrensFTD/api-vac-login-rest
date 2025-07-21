@@ -3,6 +3,7 @@ import { z } from "zod";
 export const verifyTokenSchema = z.object({
   body: z.object({
     token: z.string().min(1, "Token is required"),
+    country: z.string().min(1, "Country is required")
   }),
 });
 
@@ -65,6 +66,7 @@ export const vColaboradoresSchema = z.object({
 export const getUserSchema = z.object({
   body: z.object({
     token: z.string().min(1, "Token is required"),
+    country: z.string().min(1, "Country is required")
   })
 })
 

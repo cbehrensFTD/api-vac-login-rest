@@ -4,7 +4,7 @@ import { emailService } from "../services/email.service";
 
 export const verifyToken: Handler = async (req, res) => {
   try {
-    const { token } = req.body;
+    const { token, country } = req.body;
 
     const verifyTokenResult = await authService.verifyToken(token);
 
@@ -20,7 +20,8 @@ export const verifyToken: Handler = async (req, res) => {
     }
 
     const validateEmailResult = await authService.validateEmail(
-      verifyTokenResult.email
+      verifyTokenResult.email,
+      country
     );
 
     if (!validateEmailResult.success) {
@@ -65,7 +66,7 @@ export const generateOtp: Handler = async (req, res) => {
 
 export const verifyOtp: Handler = async (req, res) => {
   try {
-    const { token, otp } = req.body;
+    const { token, otp, country } = req.body;
 
     const verifyOtpResult = await authService.verifyOtp(token, otp);
 
@@ -81,7 +82,8 @@ export const verifyOtp: Handler = async (req, res) => {
     }
 
     const validateEmailResult = await authService.validateEmail(
-      verifyOtpResult.email
+      verifyOtpResult.email,
+      country
     );
 
     if (!validateEmailResult.success) {
@@ -104,7 +106,7 @@ export const verifyOtp: Handler = async (req, res) => {
 
 export const getUser: Handler = async (req, res) => {
   try {
-    const { token } = req.body;
+    const { token, country } = req.body;
 
     const verifyTokenResult = await authService.verifyToken(token);
 
@@ -120,7 +122,8 @@ export const getUser: Handler = async (req, res) => {
     }
 
     const validateEmailResult = await authService.validateEmail(
-      verifyTokenResult.email
+      verifyTokenResult.email,
+      country
     );
 
     if (!validateEmailResult.success) {

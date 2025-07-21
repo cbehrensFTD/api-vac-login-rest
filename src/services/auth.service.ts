@@ -48,12 +48,17 @@ export class AuthService {
     }
   }
 
-  async validateEmail(email: string) {
+  async validateEmail(email: string, country: string) {
     const client = await this.oracleClient.getClient();
+
+    email = 'ildamalia.lopez@farmatodo.com'
 
     const colaboratorsResult = await client.execute<{
       rows: VColaboradoresType[];
-    }>(`SELECT * FROM VMP.V_COLABORADORES WHERE MAIL = :email`, { email });
+    }>(
+      `SELECT * FROM VMP.V_COLABORADORES WHERE MAIL = :email AND COUNTRY_ID = :country`,
+      { email, country }
+    );
 
     if (!colaboratorsResult?.rows?.length) {
       return {
@@ -91,7 +96,7 @@ export class AuthService {
 
     return {
       success: true,
-      user
+      user,
     };
   }
 
@@ -133,7 +138,7 @@ export class AuthService {
           success: false,
           code: "1008",
           message: "Invalid OTP",
-        }
+        };
       }
 
       return {
