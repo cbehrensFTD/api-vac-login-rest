@@ -51,8 +51,6 @@ export class AuthService {
   async validateEmail(email: string, country: string) {
     const client = await this.oracleClient.getClient();
 
-    email = 'ildamalia.lopez@farmatodo.com'
-
     const colaboratorsResult = await client.execute<{
       rows: VColaboradoresType[];
     }>(
