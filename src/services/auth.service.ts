@@ -70,7 +70,7 @@ export class AuthService {
       .rows[0] as unknown as VColaboradoresType;
 
     const usersResult = await client.execute<{ rows: UsersType[] }>(
-      `SELECT * FROM VMP.USERS WHERE ID_PERS = :idPers`,
+      `SELECT * FROM VMP.USERS WHERE ID_PERS = :idPers AND COUNTRY_ID = :country`,
       { idPers: colaborator.ID_PERS }
     );
 
