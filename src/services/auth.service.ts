@@ -71,7 +71,7 @@ export class AuthService {
 
     const usersResult = await client.execute<{ rows: UsersType[] }>(
       `SELECT * FROM VMP.USERS WHERE ID_PERS = :idPers AND COUNTRY_ID = :country`,
-      { idPers: colaborator.ID_PERS }
+      { idPers: colaborator.ID_PERS, country }
     );
 
     if (!usersResult?.rows?.length) {
